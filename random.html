@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    function startApp() {
+        var startApp = confirm("Welcome to the random paper assignment generator! Do you want to start?");
+        if (startApp) {
+            generateRandomAssignments();
+        } else {
+            alert("Thank you for using the random paper assignment generator. Goodbye!");
+        }
+    }
+
+    function generateRandomAssignments() {
+        var numPapers = parseInt(prompt("Enter the number of papers:"));
+        var max = parseInt(prompt("Enter the maximum number:"));
+
+        // Check if input is valid
+        if (isNaN(numPapers) || isNaN(max) || numPapers <= 0 || max <= 0) {
+            alert("Invalid input. Please enter valid numbers greater than 0.");
+            return;
+        }
+
+        var assignments = [];
+        var teamMembers = ['Alena Shull', 'Ameesha Narine', 'Jay Holmes', 'Jill Norman', 'Kianan Carr', 'Madisson Blackmon', 'Sophia Pope', 'Tharun Derangula', 'Treasure Evans', 'Yeonkuk Woo'];
+
+        // Shuffle the team members array
+        shuffleArray(teamMembers);
+
+        // Generate random assignments
+        for (var i = 0; i < numPapers; i++) {
+            var assignedPerson = teamMembers[i % teamMembers.length];
+            var randomNumber = Math.floor(Math.random() * max) + 1;
+            assignments.push("Paper " + randomNumber + ": " + assignedPerson);
+        }
+
+        // Display the result
+        alert("Random assignments with corresponding random numbers:\n" + assignments.join("\n"));
+
+        // Ask user if they want to generate another set of assignments
+        var repeat = confirm("Do you want to generate another set of assignments?");
+        if (repeat) {
+            generateRandomAssignments(); // Recursively call the function again
+        } else {
+            startApp(); // Go back to the start point
+        }
+    }
+
+    // Function to shuffle an array
+    function shuffleArray(array) {
+        for (var i = array.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+        }
+    }
+
+    // Start the application
+    startApp();
+    </script>
+    
+</body>
+</html>
